@@ -1,13 +1,13 @@
-import shutil
+from scipy.io import savemat
+import numpy as np
+import glob
+import os
 
-source = "C:\Tepegoz\Images"
-destination = "C:\Tepegoz\iRiS_Kinetics_Github"
-
-# Copy the content of
-# source to destination
-dest = shutil.copy(source, destination)
-
-# Print path of newly
-# created file
-print("Destination path:", dest)
+def np2mat():
+    npzFiles = glob.glob("*.npy", root_dir= "C:\Tepegoz\Images\Temp_np")
+    for f in npzFiles:
+        fm = os.path.splitext(f)[0]+'.mat'
+        d = np.load(f)
+        savemat(fm, d)
+        print('generated ', fm, 'from', f)
 

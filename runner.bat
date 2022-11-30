@@ -1,0 +1,1 @@
+C:\Tepegoz\Basic\venv\Scripts\python.exe C:\Tepegoz\Basic\main.py %*

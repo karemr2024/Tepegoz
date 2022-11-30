@@ -43,19 +43,22 @@ def get_one_image_array(cam, imray):
     # if cam.EventExposureStart:
         img = cam.GetNextImage()
         while img.IsIncomplete():
-            img = cam.GetNextImage()
             img.Release()
+            img = cam.GetNextImage()
+            # img.Release() # original
+            print("Image is incomplete.")
         if not img.IsIncomplete():
             # if cam.EventExposureEnd: #original
             # if cam.EventFrameStart:
-            if cam.EventFrameEnd:
             # if cam.EventExposureStart:
+            if cam.EventFrameEnd:
                 img.Release()
                 imray = np.multiply(imray, np.array(img.GetNDArray(), dtype=np.uint16))
                 # imray = np.multiply(imray, np.frombuffer(img.GetNDArray(), dtype=np.uint16))
                 imdict['image_ptr'] = img
                 imdict['image_array'] = imray
                 imdict['timestamp'] = img.GetTimeStamp()
+                del img, imray #testing this out
                 return imdict, True
 
 
@@ -152,7 +155,7 @@ def set_cam_buffer(cam):
     # PySpin.StreamBufferHandlingMode_NewestOnly
     # PySpin.StreamBufferHandlingMode_OldestFirstOverwrite
     cam.TLStream.StreamBufferHandlingMode.SetValue(PySpin.StreamBufferHandlingMode_NewestOnly)
-
+    # cam.TransportLayerDevice.GevDeviceReadAndWriteTimeout = 1
 
 def disable_auto_exp(cam):
     print('Disabling Auto Exposure')

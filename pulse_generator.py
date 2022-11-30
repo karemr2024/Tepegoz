@@ -18,8 +18,8 @@ atexit.register(__destructor)
 def __connect(portno):
     __SERIAL.baudrate = 115200
     __SERIAL.port = 'COM' + str(portno)
-    __SERIAL.timeout = 0.03
-    __SERIAL.write_timeout = 0.03
+    __SERIAL.timeout = 0.1
+    __SERIAL.write_timeout = 0.1
     __SERIAL.open()
 
 

@@ -70,7 +70,7 @@ class Ui_Dialog(object):
         self.spinBox_ImgNum.setGeometry(QtCore.QRect(360, 250, 91, 22))
         self.spinBox_ImgNum.setObjectName("spinBox_ImgNum")
         self.spinBox_ImgNum.setMinimum(0)
-        self.spinBox_ImgNum.setMaximum(10000)
+        self.spinBox_ImgNum.setMaximum(200000)
         self.spinBox_ImgNum.setValue(100)
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
         self.lineEdit.setGeometry(QtCore.QRect(490, 260, 201, 20))
@@ -97,10 +97,10 @@ class Ui_Dialog(object):
 
     def connect_buttons(self):
 
-        # switchin bw tiff and mat
+        # switchin rollingmean
 
         self.pushButton_Acquire_Images.clicked.connect(
-             lambda: experiment_cmds.run_experiment_mat(self.spinBox_ImgNum.value(),
+             lambda: experiment_cmds.run_experiment_optimised(self.spinBox_ImgNum.value(),
                                                         self.lineEdit.text(), "CUSTOM",
                                                         self.doubleSpinBox_Gain.value(),
                                                         int(self.doubleSpinBox_PWM_Freq.value()),
